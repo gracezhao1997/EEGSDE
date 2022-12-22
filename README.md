@@ -30,7 +30,7 @@ pip install ase==3.19.0
 pip install imageio
 ```
 ### Pretrained Checkpoints
-We provide the pretrained checkpoints and the corresponding args on QM9 dataset here. Please put them in the ```pretrained_models/dir```. For example, when generating molecules with desired mu, please put the args and pretrained checkpoints of diffusion models in ```pretrained_models/cEDM_mu```, put the args and pretrained checkpoints of property prediction model used in EEGSDE in ```pretrained_models/predict_mu``` and put the args and pretrained checkpoints of the property prediction model for evaluation in ```pretrained_models/evaluate_mu```.
+We provide the pretrained checkpoints and the corresponding args on QM9 dataset here. Please put them in the ```pretrained_models/dir```. For example, when generating molecules with desired mu, please put the args and pretrained checkpoints of diffusion models in ```pretrained_models/cEDM_mu```, put the args and pretrained checkpoints of property prediction model used in energy function in ```pretrained_models/predict_mu``` and put the args and pretrained checkpoints of the property prediction model for evaluation in ```pretrained_models/evaluate_mu```.
 
 |  Condition   | Diffusion Models  | Prediction Model in Energy Function  | Prediction Model for Evaluation  |
 |  ----  | ----  |----  |----  |
@@ -57,9 +57,7 @@ Take generating molecules with desired mu as an example:
 ```
 python run_EEGSDE_single_property.py --exp_name eegsde_mu --l 1.0 --property mu --generators_path pretrained_models/cEDM_mu/generative_model_ema_2020.npy --args_generators_path pretrained_models/cEDM_mu/args_2020.pickle --energy_path pretrained_models/predict_mu/model_ema_2000.npy --args_energy_path pretrained_models/predict_mu/args_2000.pickle --classifiers_path pretrained_models/evaluate_mu/best_checkpoint.npy --args_classifiers_path pretrained_models/evaluate_mu/args.pickle --batch_size 100 --iterations 100 --save True
 ```
-The ```exp_name``` is the name of experiments. The ```l``` is the scale factor of the energy function. Take the above command for example, the results will be saved in ```outputs/eegsde_mu/l_1.0```.  The ```property``` is which property to condition and is chosen from ```alpha/homo/lumo/gap/mu/Cv```.  
-The ```generators_path``` and ```args_generators_path``` is the path of model and args with conditional EDM.  The ```energy_path``` and ```args_energy_path``` is the path of model and args with property prediction model used in EEGSDE. The ```batch_size``` is the number of generated molecules each iteration. The ```iterations``` is the number of iterations.
-The ```classifiers_path``` and ```args_classifiers_path``` is the path of model and args with the property prediction model for evaluation. The ```save``` is whether save the generated molecules.
+The ```exp_name``` is the name of experiments. The ```l``` is the scale factor of the energy function. Take the above command for example, the results will be saved in ```outputs/eegsde_mu/l_1.0```.  The ```property``` is which property to condition and is chosen from ```alpha/homo/lumo/gap/mu/Cv```. The ```generators_path``` and ```args_generators_path``` is the path of model and args with conditional EDM.  The ```energy_path``` and ```args_energy_path``` is the path of model and args with property prediction model used in EEGSDE. The ```classifiers_path``` and ```args_classifiers_path``` is the path of model and args with the property prediction model for evaluation. The ```save``` is whether save the generated molecules. The ```batch_size``` is the number of generated molecules each iteration. The ```iterations``` is the number of iterations.
 
 ### Generate molecules with desired multiple quantum properties
 
@@ -80,7 +78,7 @@ python run_EEGSDE_multi_property.py --exp_name eegsde_mu_Cv --l1 1.0 --l2 10.0 -
 ```
 
 ### Generate molecules with target structures
-#### Train the time-dependent  a time-dependent fingerprint prediction model (multi-label classifier) used in energy function
+#### Train the time-dependent fingerprint prediction model (multi-label classifier) used in energy function
 ```
 python run_train_fingerprint_prediction_energy.py --exp_name predict_fingerprint --model egnn_dynamics --lr 1e-4 --nf 128 --n_layers 7 --weight_decay 1e-16 --save_model True --diffusion_steps 1000 --sin_embedding False --n_epochs 3000  --diffusion_noise_schedule polynomial_2 --diffusion_noise_precision 1e-5 --dequantization deterministic --include_charges False --load_charges True --normalize_factors [1,8,1] --dataset qm9
 ```
