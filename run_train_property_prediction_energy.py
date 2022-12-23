@@ -213,10 +213,17 @@ def main():
 
         if epoch % 250 == 0:
             utils.save_model(optim, os.path.join(workpath, 'optim_%d.npy' % (epoch)))
-            utils.save_model(model, os.path.join(workpath, 'generative_model_%d.npy' % (epoch)))
+            utils.save_model(model, os.path.join(workpath, 'model_%d.npy' % (epoch)))
             if args.ema_decay > 0:
                 utils.save_model(model_ema, os.path.join(workpath, 'model_ema_%d.npy' % (epoch)))
             with open(os.path.join(workpath, 'args_%d.pickle' % (epoch)), 'wb') as f:
+                pickle.dump(args, f)
+
+            utils.save_model(optim, os.path.join(workpath, 'optim.npy'))
+            utils.save_model(model, os.path.join(workpath, 'model.npy'))
+            if args.ema_decay > 0:
+                utils.save_model(model_ema, os.path.join(workpath, 'model_ema.npy'))
+            with open(os.path.join(workpath, 'args.pickle'), 'wb') as f:
                 pickle.dump(args, f)
 
 if __name__ == "__main__":

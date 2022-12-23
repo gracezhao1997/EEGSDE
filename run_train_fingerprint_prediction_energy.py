@@ -35,7 +35,7 @@ parser.add_argument('--diffusion_noise_schedule', type=str, default='polynomial_
 parser.add_argument('--diffusion_noise_precision', type=float, default=1e-5,
                     )
 parser.add_argument('--n_epochs', type=int, default=2000)
-parser.add_argument('--batch_size', type=int, default=96)
+parser.add_argument('--batch_size', type=int, default=128)
 parser.add_argument('--lr', type=float, default=1e-4)
 parser.add_argument('--weight_decay', type=float, default=1e-16, metavar='N',
                         help='weight decay')
@@ -58,7 +58,7 @@ parser.add_argument('--n_layers', type=int, default=7,
                     help='number of layers')
 parser.add_argument('--inv_sublayers', type=int, default=1,
                     help='number of layers')
-parser.add_argument('--nf', type=int, default=128,
+parser.add_argument('--nf', type=int, default=192,
                     help='number of layers')
 parser.add_argument('--tanh', type=eval, default=True,
                     help='use tanh in the coord_mlp')
