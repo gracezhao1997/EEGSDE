@@ -80,7 +80,7 @@ python run_EEGSDE_multi_property.py --exp_name eegsde_mu_Cv --l1 1.0 --l2 10.0 -
 ### Generate molecules with target structures
 #### Train the time-dependent fingerprint prediction model (multi-label classifier) used in energy function
 ```
-python run_train_fingerprint_prediction_energy.py --exp_name predict_fingerprint --model egnn_dynamics --lr 1e-4 --nf 128 --n_layers 7 --weight_decay 1e-16 --save_model True --diffusion_steps 1000 --sin_embedding False --n_epochs 3000  --diffusion_noise_schedule polynomial_2 --diffusion_noise_precision 1e-5 --dequantization deterministic --include_charges False --load_charges True --normalize_factors [1,8,1] --dataset qm9
+python run_train_fingerprint_prediction_energy.py --exp_name predict_fingerprint --model egnn_dynamics --batch_size 128 --lr 1e-4 --nf 192 --n_layers 7 --weight_decay 1e-16 --save_model True --diffusion_steps 1000 --sin_embedding False --n_epochs 3000  --diffusion_noise_schedule polynomial_2 --diffusion_noise_precision 1e-5 --dequantization deterministic --include_charges False --load_charges True --normalize_factors [1,8,1] --dataset qm9
 ```
 The ```exp_name``` is the name of experiments. Take the above command for example, the results will be saved in ```pretrained_models/predict_fingerprint/```.
 
