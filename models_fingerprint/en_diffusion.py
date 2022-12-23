@@ -610,7 +610,7 @@ class EnVariationalDiffusion(torch.nn.Module):
         # Sample z_t given x, h for timestep t, from q(z_t | x, h)
         z_t = alpha_t * xh + sigma_t * eps
 
-        diffusion_utils.assert_mean_zero_with_mask(z_t[:, :, :self.n_dims], node_mask)
+        # diffusion_utils.assert_mean_zero_with_mask(z_t[:, :, :self.n_dims], node_mask)
 
         # Neural net prediction.
         net_out = self.phi(z_t, t, node_mask, edge_mask, context)
@@ -734,19 +734,19 @@ class EnVariationalDiffusion(torch.nn.Module):
             eps_t = self.phi(zt, t, node_mask, edge_mask, context)
 
         # Compute mu for p(zs | zt).
-        diffusion_utils.assert_mean_zero_with_mask(zt[:, :, :self.n_dims], node_mask)
-        diffusion_utils.assert_mean_zero_with_mask(eps_t[:, :, :self.n_dims], node_mask)
+        # diffusion_utils.assert_mean_zero_with_mask(zt[:, :, :self.n_dims], node_mask)
+        # diffusion_utils.assert_mean_zero_with_mask(eps_t[:, :, :self.n_dims], node_mask)
         mu = zt / alpha_t_given_s - (sigma2_t_given_s / alpha_t_given_s / sigma_t) * eps_t
 
-        if l>0:
+        if l > 0:
             #guidance
-            c = context [:,1]
+            c = context[:, 1]
             bs = context.size(0)
             weight_t = sigma2_t_given_s / alpha_t_given_s
 
             with RequiresGradContext(zt, requires_grad=True):
                 prediction = guidance.phi(zt, t, node_mask, edge_mask)
-                energy = l2_fp(prediction.reshape(bs,-1), c.reshape(bs,-1))
+                energy = l2_fp(prediction.reshape(bs, -1), c.reshape(bs, -1))
                 grad = autograd.grad(energy.sum(), zt)[0]
 
             grad = torch.cat(
@@ -754,8 +754,6 @@ class EnVariationalDiffusion(torch.nn.Module):
                                                        node_mask),
                  grad[:, :, self.n_dims:]], dim=2
             )
-            # grad_max = torch.max(grad)
-            # print('grad_max:',grad_max)
             mu = mu - l * weight_t * grad.detach()
 
         # Compute sigma for p(zs | zt).
@@ -796,7 +794,7 @@ class EnVariationalDiffusion(torch.nn.Module):
         else:
             z = self.sample_combined_position_feature_noise(n_samples, n_nodes, node_mask)
 
-        diffusion_utils.assert_mean_zero_with_mask(z[:, :, :self.n_dims], node_mask)
+        # diffusion_utils.assert_mean_zero_with_mask(z[:, :, :self.n_dims], node_mask)
 
         for s in reversed(range(0, self.T)):
             s_array = torch.full((n_samples, 1), fill_value=s, device=z.device)
@@ -807,7 +805,7 @@ class EnVariationalDiffusion(torch.nn.Module):
 
         # Finally sample p(x, h | z_0).
         x, h = self.sample_p_xh_given_z0(z, node_mask, edge_mask, context, fix_noise=fix_noise)
-        diffusion_utils.assert_mean_zero_with_mask(x, node_mask)
+        # diffusion_utils.assert_mean_zero_with_mask(x, node_mask)
 
         max_cog = torch.sum(x, dim=1, keepdim=True).abs().max().item()
         if max_cog > 5e-2:
