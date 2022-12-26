@@ -355,10 +355,8 @@ class EnergyDiffusion(torch.nn.Module):
         """Computes an estimator for the variational lower bound, or the simple loss (MSE)."""
 
         # Sample a timestep t.
-        # t_int = torch.randint(
-        #     0, self.T + 1, size=(x.size(0), 1), device=x.device).float()
         t_int = torch.randint(
-            0, 5, size=(x.size(0), 1), device=x.device).float()
+            0, self.T + 1, size=(x.size(0), 1), device=x.device).float()
 
         # Normalize t to [0, 1]. Note that the negative
         # step of s will never be used, since then p(x | z0) is computed.
