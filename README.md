@@ -1,6 +1,6 @@
 # Equivariant Enengy-guided SDE (EEGSDE) for Inverse Molecule Design
 This is the official implementation for [Equivariant Enengy-guided SDE for Inverse Molecule Design](https://arxiv.org/abs/2209.15408). Our related work is [EGSDE: Unpaired Image-to-Image Translation via
-Energy-Guided Stochastic Differential Equations](https://arxiv.org/abs/2207.06635) (NIPS 2022).
+Energy-Guided Stochastic Differential Equations](https://github.com/ML-GSAI/EGSDE) (NIPS 2022).
 ### Overview
 In this paper, we propose equivariant energy-guided stochastic differential equations
 (EEGSDE), a flexible framework for controllable 3D molecule generation under
