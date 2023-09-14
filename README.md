@@ -1,5 +1,5 @@
 # Equivariant Enengy-guided SDE (EEGSDE) for Inverse Molecule Design
-This is the official implementation for [Equivariant Enengy-guided SDE for Inverse Molecule Design](https://arxiv.org/abs/2209.15408) (ICLR 2023). Our related work is [EGSDE: Unpaired Image-to-Image Translation via
+This is the official implementation for [Equivariant Enengy-guided SDE for Inverse Molecule Design](https://arxiv.org/abs/2209.15408). Our related work is [EGSDE: Unpaired Image-to-Image Translation via
 Energy-Guided Stochastic Differential Equations](https://github.com/ML-GSAI/EGSDE) (NIPS 2022).
 ### Overview
 In this paper, we propose equivariant energy-guided stochastic differential equations
@@ -31,20 +31,20 @@ pip install ase==3.19.0
 pip install imageio
 ```
 ### Pretrained Checkpoints
-We provide the pretrained checkpoints and the corresponding args on QM9 dataset here. Please put them in the ```pretrained_models/dir```. For example, when generating molecules with desired mu, please put the args and pretrained checkpoints of diffusion models in ```pretrained_models/cEDM_mu```, put the args and pretrained checkpoints of property prediction model used in energy function in ```pretrained_models/predict_mu``` and put the args and pretrained checkpoints of the property prediction model for evaluation in ```pretrained_models/evaluate_mu```.
+We provide the pretrained checkpoints and the corresponding args on QM9 dataset [here](https://drive.google.com/drive/folders/13LVo_m0ZWifl94-WmEB0fedeqc8uiX3C). Please put them in the ```pretrained_models/dir```. For example, when generating molecules with desired mu, please put the args and pretrained checkpoints of diffusion models in ```pretrained_models/cEDM_mu```, put the args and pretrained checkpoints of property prediction model used in energy function in ```pretrained_models/predict_mu``` and put the args and pretrained checkpoints of the property prediction model for evaluation in ```pretrained_models/evaluate_mu```.
 
 |  Condition   | Diffusion Models  | Prediction Model in Energy Function  | Prediction Model for Evaluation  |
 |  ----  | ----  |----  |----  |
-| Cv  | [cEDM_Cv](https://drive.google.com/drive/folders/1DI7H2gQH_1GFDztM8oL1fc9yHaodOwki?usp=share_link) | [predict_Cv](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link) | [evaluate_Cv](https://drive.google.com/drive/folders/1RFpa-0zPN4uerXeEYLD582n0Jsz3oj1u?usp=share_link) |
-| mu  | [cEDM_mu](https://drive.google.com/drive/folders/1ekwrREpWAdgn5T3OLtuiPQhev5zrS3dZ?usp=share_link) | [predict_mu](https://drive.google.com/drive/folders/1lYDPeTCTKbyST0_VWKoK5k-MNexn1G_C?usp=share_link) | [evaluate_mu](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link)|
-| alpha  | [cEDM_alpha](https://drive.google.com/drive/folders/1jSok51D98LiYvKSFH4oeMxXDz8ANR7FH?usp=share_link) |[predict_alpha](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link) | [evaluate_alpha](https://drive.google.com/drive/folders/1NFU-5cnoSAY6P3qT2J8_NOFkXw1n2Dpi?usp=share_link) |
-| gap  | [cEDM_gap](https://drive.google.com/drive/folders/1t-PSeetZu2xRkL9Rwophf4nyG4IdouAh?usp=share_link) | [predict_gap](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link) | [evaluate_gap](https://drive.google.com/drive/folders/1YpESevdv4MJa9wol5DduXNsy1Qy2dtEj?usp=share_link)|
-| homo  | [cEDM_homo](https://drive.google.com/drive/folders/1Aoh5GBGf4xdK9XKamI0Q-ONLYcmq5jsi?usp=share_link) | [predict_homo](https://drive.google.com/drive/folders/1s5rmf4zmhhuLGquRnRD4VNCNlqvBVNCa?usp=share_link) | [evaluate_homo](https://drive.google.com/drive/folders/1epz3rDAf9xhns3zXckcbqjG119Qp9p5h) |
+| Cv  | [cEDM_Cv](https://drive.google.com/drive/folders/1DI7H2gQH_1GFDztM8oL1fc9yHaodOwki?usp=share_link) | [predict_Cv](https://drive.google.com/drive/folders/1uzm8-FOWjb5P6VfTJCW6s8ZRw4QlMOP8) | [evaluate_Cv](https://drive.google.com/drive/folders/1RFpa-0zPN4uerXeEYLD582n0Jsz3oj1u?usp=share_link) |
+| mu  | [cEDM_mu](https://drive.google.com/drive/folders/1ekwrREpWAdgn5T3OLtuiPQhev5zrS3dZ?usp=share_link) | [predict_mu](https://drive.google.com/drive/folders/1lYDPeTCTKbyST0_VWKoK5k-MNexn1G_C) | [evaluate_mu](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link)|
+| alpha  | [cEDM_alpha](https://drive.google.com/drive/folders/1jSok51D98LiYvKSFH4oeMxXDz8ANR7FH?usp=share_link) |[predict_alpha](https://drive.google.com/drive/folders/1Wb2WALcEvYKVhqbgYve4tYKVUNhCY7Wv) | [evaluate_alpha](https://drive.google.com/drive/folders/1NFU-5cnoSAY6P3qT2J8_NOFkXw1n2Dpi?usp=share_link) |
+| gap  | [cEDM_gap](https://drive.google.com/drive/folders/1t-PSeetZu2xRkL9Rwophf4nyG4IdouAh?usp=share_link) | [predict_gap](https://drive.google.com/drive/folders/1R-lb1WrBdow4MMmGEajLT3r5k7Fhp1Vn) | [evaluate_gap](https://drive.google.com/drive/folders/1YpESevdv4MJa9wol5DduXNsy1Qy2dtEj?usp=share_link)|
+| homo  | [cEDM_homo](https://drive.google.com/drive/folders/1Aoh5GBGf4xdK9XKamI0Q-ONLYcmq5jsi?usp=share_link) | [predict_homo](https://drive.google.com/drive/folders/1s5rmf4zmhhuLGquRnRD4VNCNlqvBVNCa?usp=share_link) | [evaluate_homo](https://drive.google.com/drive/folders/1YpESevdv4MJa9wol5DduXNsy1Qy2dtEj?usp=share_link) |
 | lumo | [cEDM_lumo](https://drive.google.com/drive/folders/1hwCUukR_l5NpuvY3BfrFF0S83TYIHNGv?usp=share_link) | [predict_lumo](https://drive.google.com/drive/folders/12VvTbN6ulUIMCbS7X4B_aoiXhRE_XL2O?usp=share_link)| [evaluate_lumo](https://drive.google.com/drive/folders/16C61zDqggRUVp-lMOcTrbgzDZixrA76l?usp=share_link) |
 | mu,Cv | [cEDM_mu_Cv](https://drive.google.com/drive/folders/1k-INe4oSR0XCSYu4F3Q3uQDa9kAylMvq?usp=share_link) | - | - |
 | gap,mu | [cEDM_gap_mu](https://drive.google.com/drive/folders/1mP0H2q-Slh8BscZONqjWYg2CxZCmqUVH?usp=share_link) | - |- |
 | alpha,mu | [cEDM_alpha_mu](https://drive.google.com/drive/folders/1G0_PchELM0tMiE_FYkuJXWMuWTvhSofI?usp=share_link) | - |- |
-| fingerprint | [cEDM_fingerprint](https://drive.google.com/drive/folders/1aKoOQ7Cqm9wO4Vy5KWxoulWtnzw34m5S?usp=share_link)| [predict_fingerprint](https://drive.google.com/drive/folders/179ZZY9a4lICbVIl4IF07FORGtZNLAK94?usp=share_link) | - |
+| fingerprint | [cEDM_fingerprint](https://drive.google.com/drive/folders/1aKoOQ7Cqm9wO4Vy5KWxoulWtnzw34m5S?usp=share_link)| [predict_fingerprint](https://drive.google.com/drive/folders/1MJq9baBtZXcRM1J5cN2muFDjLvPvXjiw) | - |
 
 ### Generate molecules with desired single quantum properties
 
